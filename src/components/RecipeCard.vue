@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { defineProps, watchEffect, ref } from 'vue';
+  import { watchEffect, ref } from 'vue';
   import { RouterLink } from 'vue-router';
   import { storeToRefs } from 'pinia';
 
