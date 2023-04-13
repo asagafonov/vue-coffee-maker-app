@@ -3,6 +3,7 @@
   import { useRouter, useRoute } from 'vue-router';
 
   import { useRecipesStore } from '@/stores/recipes';
+  import { usePopupsStore } from '@/stores/popups';
   import { usePreventScroll } from './composables/usePreventScroll';
   import data from '../data/cards';
 
@@ -14,16 +15,20 @@
   const recipeId = Number(route.params.id);
   const recipe = data.find((el) => el.id === recipeId);
 
-  const store = useRecipesStore();
-  const { setActiveRecipeId } = store;
+  const recipesState = useRecipesStore();
+  const popupsState = usePopupsStore();
+  const { setActiveRecipeId } = recipesState;
+  const { setIsPopupActive } = popupsState;
 
   const closePane = () => {
     setActiveRecipeId(null);
+    setIsPopupActive(false);
     router.push('/');
   }
 
   onMounted(() => {
     setActiveRecipeId(recipeId);
+    setIsPopupActive(true);
   });
 </script>
 

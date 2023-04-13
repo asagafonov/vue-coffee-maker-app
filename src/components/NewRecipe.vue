@@ -1,11 +1,18 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
 
+  import { usePopupsStore } from '@/stores/popups';
   import { usePreventScroll } from './composables/usePreventScroll';
   usePreventScroll();
 
   const router = useRouter();
+  const popupsState = usePopupsStore();
+  const { setIsPopupActive } = popupsState;
+
+  onMounted(() => {
+    setIsPopupActive(true);
+  })
 
   interface Step {
     order: number;
@@ -69,6 +76,7 @@
     const isValid = validateForm();
 
     if (isValid) {
+      setIsPopupActive(false);
       router.push('/');
     };
   };

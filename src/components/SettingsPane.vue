@@ -4,8 +4,8 @@
 
   import { useRecipesStore } from '@/stores/recipes';
 
-  const store = useRecipesStore();
-  const { recipes } = storeToRefs(store);
+  const recipesState = useRecipesStore();
+  const { recipes } = storeToRefs(recipesState);
 
   const router = useRouter();
 

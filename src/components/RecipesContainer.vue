@@ -1,41 +1,38 @@
 <script setup lang="ts">
-  import { onMounted, ref, watchEffect } from 'vue';
-  import { useRouter, useRoute } from 'vue-router';
+  import { onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
   import { storeToRefs } from 'pinia';
   import { useRecipesStore } from '@/stores/recipes';
+  import { usePopupsStore } from '@/stores/popups';
 
   import RecipeCard from './RecipeCard.vue';
 
-  const store = useRecipesStore();
-  const { getRecipes } = store;
-  const { recipes, activeRecipeId } = storeToRefs(store);
-  const { setActiveRecipeId } = store;
+  const recipesState = useRecipesStore();
+  const popupsState = usePopupsStore();
+
+  const { getRecipes } = recipesState;
+  const { recipes } = storeToRefs(recipesState);
+  const { setActiveRecipeId } = recipesState;
+
+  const { isPopupActive } = storeToRefs(popupsState);
+  const { setIsPopupActive } = popupsState;
 
   const router = useRouter();
-  const route = useRoute();
-
-  const isNewPage = ref(false);
 
   onMounted(() => {
     getRecipes();
-  })
-
-  watchEffect(() => {
-    if (route.path.includes('/recipes/new')) {
-      isNewPage.value = true;
-    }
   });
 
   const handleCloseShader = () => {
+    setIsPopupActive(false);
     setActiveRecipeId(null);
-    isNewPage.value = false;
     router.push('/');
   };
 </script>
 
 <template>
   <Transition appear>
-    <div v-if="activeRecipeId || isNewPage" class="shader" @click="handleCloseShader" />
+    <div v-if="isPopupActive" class="shader" @click="handleCloseShader" />
   </Transition>
   <div class="recipes_container">
     <RecipeCard
