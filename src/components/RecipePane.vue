@@ -3,7 +3,10 @@
   import { useRouter, useRoute } from 'vue-router';
 
   import { useRecipesStore } from '@/stores/recipes';
+  import { usePreventScroll } from './composables/usePreventScroll';
   import data from '../data/cards';
+
+  usePreventScroll();
 
   const router = useRouter();
   const route = useRoute();
@@ -25,20 +28,22 @@
 </script>
 
 <template>
-  <div v-if="recipe" class="recipe_pane">
-    <div class="recipe_pane__header">
-      <p class="recipe_pane__title">{{ recipe.title }}</p>
-      <button
-      type="button"
-      class="recipe_pane__close_btn"
-      @click="closePane"
-    >
-      Close
-    </button>
+  <Transition appear>
+    <div v-if="recipe" class="recipe_pane">
+      <div class="recipe_pane__header">
+        <p class="recipe_pane__title">{{ recipe.title }}</p>
+        <button
+        type="button"
+        class="recipe_pane__close_btn"
+        @click="closePane"
+      >
+        Close
+      </button>
+      </div>
+      <img class="recipe_pane__image" :src="recipe.img" />
+      <p class="recipe_pane__description">{{ recipe.description }}</p>
     </div>
-    <img class="recipe_pane__image" :src="recipe.img" />
-    <p class="recipe_pane__description">{{ recipe.description }}</p>
-  </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -100,5 +105,16 @@
     width: 100%;
     border-radius: 8px;
     margin: 12px 0;
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
   }
 </style>

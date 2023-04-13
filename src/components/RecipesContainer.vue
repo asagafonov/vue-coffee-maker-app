@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { onMounted } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { onMounted, ref, watchEffect } from 'vue';
+  import { useRouter, useRoute } from 'vue-router';
   import { storeToRefs } from 'pinia';
   import { useRecipesStore } from '@/stores/recipes';
 
@@ -12,19 +12,31 @@
   const { setActiveRecipeId } = store;
 
   const router = useRouter();
+  const route = useRoute();
+
+  const isNewPage = ref(false);
 
   onMounted(() => {
     getRecipes();
   })
 
+  watchEffect(() => {
+    if (route.path.includes('/recipes/new')) {
+      isNewPage.value = true;
+    }
+  });
+
   const handleCloseShader = () => {
     setActiveRecipeId(null);
+    isNewPage.value = false;
     router.push('/');
   };
 </script>
 
 <template>
-  <div v-if="activeRecipeId" class="shader" @click="handleCloseShader" />
+  <Transition appear>
+    <div v-if="activeRecipeId || isNewPage" class="shader" @click="handleCloseShader" />
+  </Transition>
   <div class="recipes_container">
     <RecipeCard
       v-for="recipe of recipes"
@@ -51,5 +63,15 @@
     height: 100%;
     opacity: 0.4;
     cursor: url('../../public/favicon.ico'), default;
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
   }
 </style>

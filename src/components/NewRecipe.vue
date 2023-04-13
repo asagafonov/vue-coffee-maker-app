@@ -1,6 +1,9 @@
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
+
+  import { usePreventScroll } from './composables/usePreventScroll';
+  usePreventScroll();
 
   const router = useRouter();
 
@@ -68,35 +71,37 @@
 </script>
 
 <template>
-  <div class="new_recipe_pane">
-    <h2>Create new recipe</h2>
-    <form>
-      <div class="new_recipe_pane__section">
-        <label for="title">Title</label>
-        <input id="title" type="text" v-model.trim="title">
-      </div>
-      <div class="new_recipe_pane__section">
-        <label for="description">Description</label>
-        <textarea id="description" v-model.trim="description" />
-      </div>
-      <div class="new_recipe_pane__section">
-        <label for="image">Image URL</label>
-        <input id="image" type="text" v-model.trim="imageUrl">
-      </div>
-      <p>Preparation steps</p>
-      <div class="new_recipe_pane__section" v-for="(step, index) in recipeSteps" :key="step.order">
-        <label :for="`step_${index}`">{{ `Step ${index + 1}` }}</label>
-        <textarea :id="`step_${index}`" type="text" v-model="recipeSteps[index].description" />
-      </div>
-      <div class="new_recipe_pane__buttons_container">
-        <button type="button" class="btn" @click.prevent="handleAddRecipe">Add Step</button>
-        <button v-if="recipeSteps?.length > 1" class="btn btn_dark" @click.prevent="handleRemoveRecipe">Remove Step</button>
-      </div>
+  <Transition appear>
+    <div class="new_recipe_pane">
+      <h2>Create new recipe</h2>
+      <form>
+        <div class="new_recipe_pane__section">
+          <label for="title">Title</label>
+          <input id="title" type="text" v-model.trim="title">
+        </div>
+        <div class="new_recipe_pane__section">
+          <label for="description">Description</label>
+          <textarea id="description" v-model.trim="description" />
+        </div>
+        <div class="new_recipe_pane__section">
+          <label for="image">Image URL</label>
+          <input id="image" type="text" v-model.trim="imageUrl">
+        </div>
+        <p>Preparation steps</p>
+        <div class="new_recipe_pane__section" v-for="(step, index) in recipeSteps" :key="step.order">
+          <label :for="`step_${index}`">{{ `Step ${index + 1}` }}</label>
+          <textarea :id="`step_${index}`" type="text" v-model="recipeSteps[index].description" />
+        </div>
+        <div class="new_recipe_pane__buttons_container">
+          <button type="button" class="btn" @click.prevent="handleAddRecipe">Add Step</button>
+          <button v-if="recipeSteps?.length > 1" class="btn btn_dark" @click.prevent="handleRemoveRecipe">Remove Step</button>
+        </div>
 
-      <p v-if="errorMessage" class="error_message">{{ errorMessage }}</p>
-      <button type="submit" class="btn new_recipe_pane__btn_submit" @click.prevent="submitForm">Create</button>
-    </form>
-  </div>
+        <p v-if="errorMessage" class="error_message">{{ errorMessage }}</p>
+        <button type="submit" class="btn new_recipe_pane__btn_submit" @click.prevent="submitForm">Create</button>
+      </form>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -145,5 +150,16 @@
     min-height: 32px;
     padding: 6px;
     font-size: 14px;
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
   }
 </style>
