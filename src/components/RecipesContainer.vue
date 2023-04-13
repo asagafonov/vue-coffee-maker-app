@@ -62,7 +62,6 @@
     width: 100%;
     height: 100%;
     opacity: 0.4;
-    cursor: url('../../public/favicon.ico'), default;
   }
 
   .v-enter-active,
