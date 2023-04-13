@@ -158,6 +158,7 @@
   }
   .error_message {
     color: red;
+    margin-bottom: 6px;
   }
 
   .new_recipe_pane input,
