@@ -85,7 +85,9 @@
   }
 
   .recipe_pane__close_btn:hover {
-    background: #000;
+    background: #FFFFFF;
+    color: #000000;
+    border: 1px solid #42b883;
   }
 
   .recipe_pane__title {

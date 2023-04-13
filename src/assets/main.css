@@ -4,3 +4,28 @@ a {
   text-decoration: none;
   color: #000;
 }
+
+.btn {
+  color: #FFFFFF;
+  background: #42b883;
+  border-radius: 6px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  outline: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border: 1px solid #42b883;
+}
+
+.btn_dark {
+  color: #FFFFFF;
+  background-color: #000000;
+}

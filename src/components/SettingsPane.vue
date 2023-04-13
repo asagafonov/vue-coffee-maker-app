@@ -13,13 +13,17 @@
     const randomRecipeId = Math.floor(Math.random() * recipes.value?.length);
     router.push(`/recipes/${randomRecipeId}`);
   };
+
+  const handleNewRecipeClick = () => {
+    router.push('/recipes/new');
+  }
 </script>
 
 <template>
   <div class="settings_pane">
     <p class="settings_pane__text">Choose any recipe from the list of use controls</p>
     <button type="button" @click="handleRandomRecipeClick">Choose random recipe</button>
-    <button type="button">Add your recipe</button>
+    <button type="button" @click="handleNewRecipeClick">Add your recipe</button>
   </div>
 </template>
 

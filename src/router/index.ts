@@ -14,12 +14,12 @@ const router = createRouter({
       name: 'recipe',
       component: () => import('../components/RecipePane.vue'),
     },
+    {
+      path: '/recipes/new',
+      name: 'new recipe',
+      component: () => import('../components/NewRecipe.vue'),
+    },
     // {
-    //   new: '/recipes/new',
-    //   name: 'new recipe',
-    //   component: () => import('../components/NewRecipe.vue'),
-    // },
-            // {
     //   new: '/sign_in',
     //   name: 'sign in',
     //   component: () => import('../components/AuthPane.vue'),
