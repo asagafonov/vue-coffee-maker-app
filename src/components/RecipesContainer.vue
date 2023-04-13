@@ -61,9 +61,11 @@
     opacity: 0.4;
   }
 
-  .v-enter-active,
-  .v-leave-active {
+  .v-enter-active {
     transition: opacity 0.5s ease;
+  }
+  .v-leave-active {
+    transition: opacity 0.2s ease;
   }
 
   .v-enter-from,
