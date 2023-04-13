@@ -42,6 +42,13 @@
       </div>
       <img class="recipe_pane__image" :src="recipe.img" />
       <p class="recipe_pane__description">{{ recipe.description }}</p>
+      <div v-if="recipe.recipe?.length" class="recipe_pane__steps_container">
+        <h3 class="recipe_pane__separator_text">Preparation steps</h3>
+        <div class="recipe_pane__description" v-for="step in recipe.recipe" :key="step.order">
+          <p class="recipe_pane__subheader">Step {{ step.order }}</p>
+          <p>{{ step.description }}</p>
+        </div>
+      </div>
     </div>
   </Transition>
 </template>
@@ -55,10 +62,9 @@
     right: 0;
     height: 100%;
     width: 520px;
-    padding: 20px;
+    padding: 56px 20px;
     overflow-y: scroll;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding-top: 56px;
   }
   .recipe_pane__header {
     display: flex;
@@ -105,6 +111,23 @@
     width: 100%;
     border-radius: 8px;
     margin: 12px 0;
+  }
+
+  .recipe_pane__separator_text {
+    font-weight: bold;
+    margin-top: 12px;
+  }
+
+  .recipe_pane__steps_container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .recipe_pane__subheader {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 6px;
   }
 
   .v-enter-active,
