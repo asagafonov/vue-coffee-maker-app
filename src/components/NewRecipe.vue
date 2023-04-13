@@ -54,6 +54,13 @@
       return false;
     }
 
+    const stepsValid = recipeSteps.value.every((step) => step.description?.length >= 20);
+
+    if (!stepsValid) {
+      errorMessage.value = 'Steps description must be at least 20 characters';
+      return false;
+    }
+
     errorMessage.value = '';
     return true;
   };
@@ -87,7 +94,7 @@
           <label for="image">Image URL</label>
           <input id="image" type="text" v-model.trim="imageUrl">
         </div>
-        <p>Preparation steps</p>
+        <p class="new_recipe_pane__separator_text">Preparation steps</p>
         <div class="new_recipe_pane__section" v-for="(step, index) in recipeSteps" :key="step.order">
           <label :for="`step_${index}`">{{ `Step ${index + 1}` }}</label>
           <textarea :id="`step_${index}`" type="text" v-model="recipeSteps[index].description" />
@@ -97,8 +104,10 @@
           <button v-if="recipeSteps?.length > 1" class="btn btn_dark" @click.prevent="handleRemoveRecipe">Remove Step</button>
         </div>
 
-        <p v-if="errorMessage" class="error_message">{{ errorMessage }}</p>
-        <button type="submit" class="btn new_recipe_pane__btn_submit" @click.prevent="submitForm">Create</button>
+        <div class="new_recipe_pane__button_wrapper">
+          <p v-if="errorMessage" class="error_message">{{ errorMessage }}</p>
+          <button type="submit" class="btn new_recipe_pane__btn_submit" @click.prevent="submitForm">Create</button>
+        </div>
       </form>
     </div>
   </Transition>
@@ -116,7 +125,7 @@
     padding: 20px;
     overflow-y: scroll;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding-top: 56px;
+    padding-top: 20px;
   }
   .new_recipe_pane h2 {
     margin-bottom: 12px;
@@ -137,7 +146,7 @@
   }
   .new_recipe_pane__btn_submit {
     padding: 12px;
-    margin-top: 20px;
+    width: 100%;
   }
   .error_message {
     color: red;
@@ -150,6 +159,14 @@
     min-height: 32px;
     padding: 6px;
     font-size: 14px;
+  }
+
+  .new_recipe_pane__separator_text {
+    font-weight: bold;
+  }
+
+  .new_recipe_pane__button_wrapper {
+    margin-top: 12px;
   }
 
   .v-enter-active,
