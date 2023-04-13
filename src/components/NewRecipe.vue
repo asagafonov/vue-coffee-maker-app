@@ -2,13 +2,16 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
 
+  import { useRecipesStore } from '@/stores/recipes';
   import { usePopupsStore } from '@/stores/popups';
   import { usePreventScroll } from './composables/usePreventScroll';
   usePreventScroll();
 
   const router = useRouter();
+  const recipesState = useRecipesStore();
   const popupsState = usePopupsStore();
   const { setIsPopupActive } = popupsState;
+  const { addRecipe } = recipesState;
 
   onMounted(() => {
     setIsPopupActive(true);
@@ -76,6 +79,13 @@
     const isValid = validateForm();
 
     if (isValid) {
+      addRecipe({
+        title: title.value,
+        description: description.value,
+        img: imageUrl.value,
+        recipe: recipeSteps.value,
+        ingredients: [],
+      });
       setIsPopupActive(false);
       router.push('/');
     };

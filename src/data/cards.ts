@@ -4,7 +4,7 @@ export interface Recipe {
 }
 
 export interface RecipeCard {
-  id: number;
+  id?: number;
   title: string;
   img: string;
   description: string;
