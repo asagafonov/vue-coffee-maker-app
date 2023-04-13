@@ -7,7 +7,7 @@
 
   const store = useRecipesStore();
   const { getRecipes } = store;
-  const { recipes } = storeToRefs(store);
+  const { recipes, activeRecipeId } = storeToRefs(store);
 
   onMounted(() => {
     getRecipes();
@@ -15,6 +15,7 @@
 </script>
 
 <template>
+  <div v-if="activeRecipeId" class="shader" @click="() => { return; }" />
   <div class="recipes_container">
     <RecipeCard
       v-for="recipe of recipes"
@@ -30,5 +31,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    width: calc(100% - 220px);
+  }
+
+  .shader {
+    position: fixed;
+    z-index: 300;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
   }
 </style>

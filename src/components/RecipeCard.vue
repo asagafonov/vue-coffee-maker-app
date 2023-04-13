@@ -39,6 +39,7 @@
     background: #FFFFFF;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
+    overflow: hidden;
   }
 
   .recipe_card__title {
@@ -52,7 +53,12 @@
     border-radius: 8px;
   }
 
+  .recipe_card__description {
+    height: 78px;
+    overflow: hidden;
+  }
+
   .active {
-    border: 1px solid lime;
+    border: 1.2px solid #42b883;
   }
 </style>

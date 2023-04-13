@@ -5,9 +5,9 @@
 </script>
 
 <template>
-  <header>
+  <!-- <header>
     The Coffee Maker
-  </header>
+  </header> -->
   <div class="main_screen">
     <RecipesContainer />
     <div class="content_container">
@@ -25,11 +25,13 @@
     font-size: 24px;
     background-color: #000000;
     color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 900;
   }
   .main_screen {
     width: 100%;
-    display: grid;
-    grid-template-columns: 70% 30%;
   }
 
   .content_container {

@@ -26,14 +26,16 @@
 
 <template>
   <div v-if="recipe" class="recipe_pane">
-    <button
+    <div class="recipe_pane__header">
+      <p class="recipe_pane__title">{{ recipe.title }}</p>
+      <button
       type="button"
       class="recipe_pane__close_btn"
       @click="closePane"
     >
-      X
+      Close
     </button>
-    <p class="recipe_pane__title">{{ recipe.title }}</p>
+    </div>
     <img class="recipe_pane__image" :src="recipe.img" />
     <p class="recipe_pane__description">{{ recipe.description }}</p>
   </div>
@@ -41,25 +43,60 @@
 
 <style scoped>
   .recipe_pane {
-    position: relative;
+    z-index: 900;
+    position: fixed;
+    background: #FFFFFF;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 520px;
+    padding: 20px;
+    overflow-y: scroll;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-top: 56px;
+  }
+  .recipe_pane__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 520px;
+    padding: 12px 20px;
+    background-color: #FFFFFF;
+    z-index: 120;
   }
 
   .recipe_pane__close_btn {
-    position: absolute;
-    right: 2px;
-    top: 2px;
+    padding: 2px 12px;
     z-index: 100;
     cursor: pointer;
+    outline: none;
+    border: none;
+    height: 24px;
+    color: #FFFFFF;
+    background: #42b883;
+    border-radius: 6px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .recipe_pane__close_btn:hover {
+    background: #000;
   }
 
   .recipe_pane__title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 24px;
     margin-bottom: 6px;
   }
 
   .recipe_pane__image {
     width: 100%;
     border-radius: 8px;
+    margin: 12px 0;
   }
 </style>
