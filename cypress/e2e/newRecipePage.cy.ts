@@ -17,10 +17,10 @@ describe('New Recipe page', () => {
   it('shows error message on validation failure', () => {
     cy.visit('/recipes/new');
     cy.get('.error_message').should('not.exist');
-    cy.get('input#title').type('No');
+    cy.get('input#title').type('Ra');
     cy.get('button[type="submit"]').click();
     cy.get('.error_message').should('contain', 'Title cannot be shorter than 6 characters');
-    cy.get('input#title').type('Random coffee name');
+    cy.get('input#title').type('ndom coffee name');
     cy.get('button[type="submit"]').click();
     cy.get('.error_message').should('contain', 'Description is required');
   });
