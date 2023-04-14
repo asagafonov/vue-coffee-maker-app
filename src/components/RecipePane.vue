@@ -27,6 +27,10 @@
   }
 
   onMounted(() => {
+    if (!recipe) {
+      router.push('/404');
+      return;
+    }
     setActiveRecipeId(recipeId);
     setIsPopupActive(true);
   });
