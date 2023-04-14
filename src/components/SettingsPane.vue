@@ -22,8 +22,8 @@
 <template>
   <div class="settings_pane">
     <p class="settings_pane__text">Choose any recipe from the list of use controls</p>
-    <button type="button" @click="handleRandomRecipeClick">Choose random recipe</button>
-    <button type="button" @click="handleNewRecipeClick">Add your recipe</button>
+    <button type="button" @click="handleRandomRecipeClick" class="settings_pane__rnd_btn">Choose random recipe</button>
+    <button type="button" @click="handleNewRecipeClick" class="settings_pane__new_btn">Add your recipe</button>
   </div>
 </template>
 

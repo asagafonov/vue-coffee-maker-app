@@ -115,11 +115,11 @@
         <p class="new_recipe_pane__separator_text">Preparation steps</p>
         <div class="new_recipe_pane__section" v-for="(step, index) in recipeSteps" :key="step.order">
           <label :for="`step_${index}`">{{ `Step ${index + 1}` }}</label>
-          <textarea :id="`step_${index}`" type="text" v-model="recipeSteps[index].description" />
+          <textarea :id="`step_${index}`" class="new_recipe_pane__step_input" type="text" v-model="recipeSteps[index].description" />
         </div>
         <div class="new_recipe_pane__buttons_container">
-          <button type="button" class="btn" @click.prevent="handleAddRecipe">Add Step</button>
-          <button v-if="recipeSteps?.length > 1" class="btn btn_dark" @click.prevent="handleRemoveRecipe">Remove Step</button>
+          <button id="add" type="button" class="btn" @click.prevent="handleAddRecipe">Add Step</button>
+          <button id="remove" v-if="recipeSteps?.length > 1" class="btn btn_dark" @click.prevent="handleRemoveRecipe">Remove Step</button>
         </div>
 
         <div class="new_recipe_pane__button_wrapper">
