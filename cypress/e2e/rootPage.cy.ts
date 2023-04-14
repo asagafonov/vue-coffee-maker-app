@@ -11,9 +11,11 @@ describe('Root page', () => {
     cy.get('div.recipe_card').first().should('have.class', 'active');
     cy.location('pathname').should('eq', '/recipes/0');
     cy.get('.shader').should('exist');
+    cy.get('body').should('have.css', 'overflow', 'hidden')
     cy.get('.recipe_pane__close_btn').click();
     cy.get('div.recipe_card').first().should('not.have.class', 'active');
     cy.location('pathname').should('eq', '/');
     cy.get('.shader').should('not.exist');
+    cy.get('body').should('have.css', 'overflow', 'visible')
   });
 })
