@@ -4,7 +4,7 @@
 
   import { useRecipesStore } from '@/stores/recipes';
   import { usePopupsStore } from '@/stores/popups';
-  import { usePreventScroll } from './composables/usePreventScroll';
+  import { usePreventScroll } from '../components/composables/usePreventScroll';
   usePreventScroll();
 
   const router = useRouter();

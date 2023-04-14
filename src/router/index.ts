@@ -7,17 +7,17 @@ const router = createRouter({
       path: '/',
       name: 'settings',
       props: true,
-      component: () => import('../components/SettingsPane.vue'),
+      component: () => import('../views/SettingsPaneView.vue'),
     },
     {
       path: '/recipes/:id',
       name: 'recipe',
-      component: () => import('../components/RecipePane.vue'),
+      component: () => import('../views/RecipePaneView.vue'),
     },
     {
       path: '/recipes/new',
       name: 'new recipe',
-      component: () => import('../components/NewRecipe.vue'),
+      component: () => import('../views/NewRecipeView.vue'),
     },
     // {
     //   new: '/sign_in',
@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/:catchall(.*)*',
       name: 'page not found',
-      component: () => import('../components/NotFoundPage.vue'),
+      component: () => import('../views/NotFoundPageView.vue'),
     },
   ],
 });
